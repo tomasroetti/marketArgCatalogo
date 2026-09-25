@@ -2,11 +2,73 @@
 // CATÁLOGO DE PRODUCTOS
 // Generado desde "CATALOGO JUGUETES.xlsx".
 // Cada producto: id, name, category, price, description, image.
-// "image" apunta a un placeholder hasta que se carguen las fotos reales:
-// poné las imágenes en /public/products/ y usá "/products/archivo.jpg".
+// Las fotos están en /public/products/ y se asignan por slug en PRODUCT_IMAGES
+// (la primera es la principal; el resto forma la galería del detalle).
+// Los productos sin fotos usan el placeholder.
 // ============================================================
 
 export const PLACEHOLDER_IMAGE = "/placeholder.svg";
+
+const PRODUCT_IMAGES = {
+  "maquina-retroexcavadora-a-control-remoto": ["/products/maquina-retroexcavadora-a-control-remoto-1.webp", "/products/maquina-retroexcavadora-a-control-remoto-2.webp"],
+  "camioneta-a-control-remoto": ["/products/camioneta-a-control-remoto-1.webp"],
+  "set-de-camionetas-monstruo": ["/products/set-de-camionetas-monstruo-1.webp"],
+  "hot-wheels-shark-catapult": ["/products/hot-wheels-shark-catapult-1.webp"],
+  "camion-de-juguete": ["/products/camion-de-juguete-1.webp"],
+  "casco-de-moto-coleccionable": ["/products/casco-de-moto-coleccionable-1.webp"],
+  "pista-hot-wheels-modelo-lobo": ["/products/pista-hot-wheels-modelo-lobo-1.webp", "/products/pista-hot-wheels-modelo-lobo-2.webp"],
+  "pista-hot-wheels-modelo-tiburon": ["/products/pista-hot-wheels-modelo-tiburon-1.webp"],
+  "pista-hot-wheels-modelo-tigre": ["/products/pista-hot-wheels-modelo-tigre-1.webp"],
+  "pista-de-autos-modelo-super-mario-galaxy": ["/products/pista-de-autos-modelo-super-mario-galaxy-1.webp", "/products/pista-de-autos-modelo-super-mario-galaxy-2.webp"],
+  "pista-de-autos-modelo-toy-story-5": ["/products/pista-de-autos-modelo-toy-story-5-1.webp"],
+  "tower-bridge": ["/products/tower-bridge-1.webp", "/products/tower-bridge-2.webp"],
+  "ciruelo-japones": ["/products/ciruelo-japones-1.webp", "/products/ciruelo-japones-2.webp", "/products/ciruelo-japones-3.webp"],
+  "rosa-en-maceta": ["/products/rosa-en-maceta-1.webp", "/products/rosa-en-maceta-2.webp", "/products/rosa-en-maceta-3.webp"],
+  "girasol": ["/products/girasol-1.webp", "/products/girasol-2.webp", "/products/girasol-3.webp"],
+  "orquidea": ["/products/orquidea-1.webp", "/products/orquidea-2.webp", "/products/orquidea-3.webp"],
+  "piramide-de-guiza": ["/products/piramide-de-guiza-1.webp"],
+  "torre-de-pisa": ["/products/torre-de-pisa-1.webp", "/products/torre-de-pisa-2.webp"],
+  "titanic": ["/products/titanic-1.webp", "/products/titanic-2.webp"],
+  "torre-eiffel": ["/products/torre-eiffel-1.webp", "/products/torre-eiffel-2.webp", "/products/torre-eiffel-3.webp"],
+  "auto-azul": ["/products/auto-azul-1.webp"],
+  "casa-del-arbol-femenina": ["/products/casa-del-arbol-femenina-1.webp", "/products/casa-del-arbol-femenina-2.webp", "/products/casa-del-arbol-femenina-3.webp"],
+  "auto-rosa": ["/products/auto-rosa-1.webp", "/products/auto-rosa-2.webp"],
+  "set-bloques-magneticos-caja-metalica": ["/products/set-bloques-magneticos-caja-metalica-1.webp"],
+  "set-bloques-magneticos-48-piezas": ["/products/set-bloques-magneticos-48-piezas-1.webp", "/products/set-bloques-magneticos-48-piezas-2.webp"],
+  "set-bloques-magneticos-tematica-espacial": ["/products/set-bloques-magneticos-tematica-espacial-1.webp"],
+  "cubo-bloques-magneticos-minecraft": ["/products/cubo-bloques-magneticos-minecraft-1.webp", "/products/cubo-bloques-magneticos-minecraft-2.webp"],
+  "bloques-magneticos-minecraft": ["/products/bloques-magneticos-minecraft-1.webp"],
+  "caja-tnt-bloques-magneticos-minecraft": ["/products/caja-tnt-bloques-magneticos-minecraft-1.webp", "/products/caja-tnt-bloques-magneticos-minecraft-2.webp", "/products/caja-tnt-bloques-magneticos-minecraft-3.webp"],
+  "carpa-celeste-rosa": ["/products/carpa-celeste-rosa-1.webp", "/products/carpa-celeste-rosa-2.webp", "/products/carpa-celeste-rosa-3.webp"],
+  "carpa-candy-shop": ["/products/carpa-candy-shop-1.webp", "/products/carpa-candy-shop-2.webp", "/products/carpa-candy-shop-3.webp", "/products/carpa-candy-shop-4.webp"],
+  "basta": ["/products/basta-1.webp"],
+  "tablero-futbol": ["/products/tablero-futbol-1.webp"],
+  "jiugongge": ["/products/jiugongge-1.webp"],
+  "face-change-rubik-cube": ["/products/face-change-rubik-cube-1.webp"],
+  "cubo-para-ninos": ["/products/cubo-para-ninos-1.webp"],
+  "lol-surprise-limited-edition": ["/products/lol-surprise-limited-edition-1.webp", "/products/lol-surprise-limited-edition-2.webp", "/products/lol-surprise-limited-edition-3.webp"],
+  "helado-lol-beautiful": ["/products/helado-lol-beautiful-1.webp"],
+  "cry-babies": ["/products/cry-babies-1.webp", "/products/cry-babies-2.webp"],
+  "juego-de-encastre-gallina-y-huevos": ["/products/juego-de-encastre-gallina-y-huevos-1.webp"],
+  "mini-heladera-viral": ["/products/mini-heladera-viral-1.webp", "/products/mini-heladera-viral-2.webp", "/products/mini-heladera-viral-3.webp"],
+  "casa-peppa-pig": ["/products/casa-peppa-pig-1.webp"],
+  "set-peppa-pig": ["/products/set-peppa-pig-1.webp"],
+  "set-de-cocina-rosa": ["/products/set-de-cocina-rosa-1.webp"],
+  "lamparas": ["/products/lamparas-1.webp", "/products/lamparas-2.webp"],
+  "auricular-haylou-s30-pro": ["/products/auricular-haylou-s30-pro-1.webp", "/products/auricular-haylou-s30-pro-2.webp"],
+  "drone": ["/products/drone-1.webp"],
+  "mario-bros": ["/products/mario-bros-1.webp", "/products/mario-bros-2.webp"],
+  "dinosaurio-yoshi-mario-bros": ["/products/dinosaurio-yoshi-mario-bros-1.webp"],
+  "figura-de-accion-toy-story": ["/products/figura-de-accion-toy-story-1.webp"],
+  "set-4-marios": ["/products/set-4-marios-1.webp"],
+  "set-mario-bros": ["/products/set-mario-bros-1.webp"],
+  "set-mario-bros-2": ["/products/set-mario-bros-2-1.webp"],
+  "microscopio": ["/products/microscopio-1.webp", "/products/microscopio-2.webp"],
+  "set-stitch": ["/products/set-stitch-1.webp"],
+  "squishy-barra-manteca": ["/products/squishy-barra-manteca-1.webp"],
+  "ametralladora-hidrogel": ["/products/ametralladora-hidrogel-1.webp"],
+  "repuesto-hidrogel": ["/products/repuesto-hidrogel-1.webp"]
+};
 
 export const CATEGORIES = [
   "Autos",
@@ -466,5 +528,7 @@ export const PRODUCTS = RAW_PRODUCTS.map((p) => {
   const base = slugify(p.name);
   const count = (usedSlugs.get(base) || 0) + 1;
   usedSlugs.set(base, count);
-  return { ...p, slug: count === 1 ? base : `${base}-${count}`, image: PLACEHOLDER_IMAGE };
+  const slug = count === 1 ? base : `${base}-${count}`;
+  const images = PRODUCT_IMAGES[slug] || [PLACEHOLDER_IMAGE];
+  return { ...p, slug, images, image: images[0] };
 });

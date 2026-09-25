@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import ProductGallery from "../components/ProductGallery";
 import { CATEGORIES, PRODUCTS } from "../data/products";
 import { SITE, WHATSAPP_MESSAGE_TEMPLATE } from "../data/config";
 import { formatPrice } from "../utils/formatPrice";
@@ -66,9 +67,7 @@ export default function ProductDetail() {
         </Link>
 
         <div className="detail-layout">
-          <div className="detail-image">
-            <img src={product.image} alt={product.name} />
-          </div>
+          <ProductGallery key={product.slug} images={product.images} name={product.name} />
 
           <div className="detail-info">
             <span className="modal-category">{product.category}</span>
