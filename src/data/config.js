@@ -6,10 +6,10 @@ export const SITE = {
   brandName: "Market",
   brandNameAccent: "Arg",
   subtitle: "Catálogo Web",
-  email: "contacto@marketarg.com",
-  phoneDisplay: "+54 9 3700 00-0000",
+  email: "Miiimportadoarg@gmail.com",
+  phoneDisplay: "+54 9 3764 86-0665",
   // Número de WhatsApp en formato internacional, SOLO NÚMEROS (sin +, espacios ni guiones)
-  whatsappNumber: "5493700000000",
+  whatsappNumber: "5493764860665",
 };
 
 // Plantilla del mensaje que se genera al tocar "Consultar por WhatsApp".
