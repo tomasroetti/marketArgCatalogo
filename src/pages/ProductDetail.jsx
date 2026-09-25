@@ -74,7 +74,7 @@ export default function ProductDetail() {
             <span className="modal-category">{product.category}</span>
             <h1 className="detail-name">{product.name}</h1>
             <p className="detail-price">{formatPrice(product.price)}</p>
-            <p className="detail-description">{product.description}</p>
+            {product.description && <p className="detail-description">{product.description}</p>}
 
             <div className="quantity-row">
               <label htmlFor="quantityInput">Cantidad</label>
