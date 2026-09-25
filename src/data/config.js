@@ -7,6 +7,8 @@ export const SITE = {
   brandNameAccent: "Arg",
   subtitle: "Catálogo Web",
   email: "Miiimportadoarg@gmail.com",
+  instagramUrl: "https://www.instagram.com/marketarg/",
+  instagramHandle: "@marketarg",
   phoneDisplay: "+54 9 3764 86-0665",
   // Número de WhatsApp en formato internacional, SOLO NÚMEROS (sin +, espacios ni guiones)
   whatsappNumber: "5493764860665",
