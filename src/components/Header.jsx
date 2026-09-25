@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import { SITE } from "../data/config";
+import { CATEGORIES } from "../data/products";
+import { PRICE_RANGES, SORT_OPTIONS } from "../data/filters";
+import { useCatalogFilters } from "../hooks/useCatalogFilters";
 
-export default function Header({ search, onSearchChange, category, onCategoryChange, categories }) {
+export default function Header() {
+  const { filters, setFilter } = useCatalogFilters();
+
   return (
     <header className="site-header">
       <div className="container header-inner">
@@ -21,23 +26,51 @@ export default function Header({ search, onSearchChange, category, onCategoryCha
             <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
           <input
-            type="text"
+            type="search"
             placeholder="Buscar productos..."
             autoComplete="off"
-            value={search}
-            onChange={(e) => onSearchChange(e.target.value)}
+            aria-label="Buscar productos"
+            value={filters.search}
+            onChange={(e) => setFilter("search", e.target.value)}
           />
         </div>
 
         <select
-          className="category-select"
-          value={category}
-          onChange={(e) => onCategoryChange(e.target.value)}
+          className="filter-select filter-category"
+          aria-label="Categoría"
+          value={filters.category}
+          onChange={(e) => setFilter("category", e.target.value)}
         >
           <option value="Todos">Todas las categorías</option>
-          {categories.map((cat) => (
+          {CATEGORIES.map((cat) => (
             <option key={cat} value={cat}>
               {cat}
+            </option>
+          ))}
+        </select>
+
+        <select
+          className="filter-select"
+          aria-label="Filtrar por precio"
+          value={filters.price}
+          onChange={(e) => setFilter("price", e.target.value)}
+        >
+          {PRICE_RANGES.map((r) => (
+            <option key={r.id} value={r.id}>
+              {r.label}
+            </option>
+          ))}
+        </select>
+
+        <select
+          className="filter-select"
+          aria-label="Ordenar"
+          value={filters.sort}
+          onChange={(e) => setFilter("sort", e.target.value)}
+        >
+          {SORT_OPTIONS.map((o) => (
+            <option key={o.id} value={o.id}>
+              {o.label}
             </option>
           ))}
         </select>
