@@ -7,7 +7,7 @@ import { SITE, WHATSAPP_MESSAGE_TEMPLATE } from "../data/config";
 import { formatPrice } from "../utils/formatPrice";
 
 export default function ProductDetail() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [quantity, setQuantity] = useState(1);
   // El header de esta página también permite buscar/filtrar,
   // pero simplemente vuelve al catálogo con el filtro aplicado
@@ -15,7 +15,7 @@ export default function ProductDetail() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Todos");
 
-  const product = useMemo(() => PRODUCTS.find((p) => p.id === Number(id)), [id]);
+  const product = useMemo(() => PRODUCTS.find((p) => p.slug === slug), [slug]);
 
   if (!product) {
     return (

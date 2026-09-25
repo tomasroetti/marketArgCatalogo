@@ -3,7 +3,7 @@ import { formatPrice } from "../utils/formatPrice";
 
 export default function ProductCard({ product }) {
   return (
-    <Link to={`/producto/${product.id}`} className="product-card">
+    <Link to={`/producto/${product.slug}`} className="product-card">
       <div className="product-image">
         <img src={product.image} alt={product.name} loading="lazy" />
       </div>

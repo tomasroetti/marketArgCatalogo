@@ -20,7 +20,17 @@ export const CATEGORIES = [
   "Hidrogel"
 ];
 
-export const PRODUCTS = [
+// Convierte el nombre en un texto apto para URL: "Torre Eiffel" -> "torre-eiffel"
+function slugify(text) {
+  return text
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+const RAW_PRODUCTS = [
   {
     "id": 1,
     "name": "Máquina Retroexcavadora a Control Remoto",
@@ -448,4 +458,13 @@ export const PRODUCTS = [
     "price": 4900,
     "description": ""
   }
-].map((p) => ({ ...p, image: PLACEHOLDER_IMAGE }));
+];
+
+// Agrega slug único (si el nombre se repite, suma -2, -3, ...) e imagen
+const usedSlugs = new Map();
+export const PRODUCTS = RAW_PRODUCTS.map((p) => {
+  const base = slugify(p.name);
+  const count = (usedSlugs.get(base) || 0) + 1;
+  usedSlugs.set(base, count);
+  return { ...p, slug: count === 1 ? base : `${base}-${count}`, image: PLACEHOLDER_IMAGE };
+});
